@@ -1,0 +1,14 @@
+# Full candidate pool — not committed (465 MB; organizers supply it at reproduction)
+candidates.jsonl
+candidates.jsonl.gz
+# NOTE: sample_input.jsonl (100 rows) IS committed so the sandbox can run.
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local tooling / OS
+.claude/
+.DS_Store
