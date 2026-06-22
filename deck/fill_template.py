@@ -138,15 +138,17 @@ def page_cover(c):
       Team Leader Name : colon x1=164.4  baseline y=109.9
       Problem Statement: colon x1=168.3  baseline y= 76.3
     """
-    c.setFont("Body", 13.5)
+    # The measured y values were bounding-box bottoms; the true text baseline is
+    # ~one descender (≈0.21·size) higher, so add it to sit on the label baseline.
+    c.setFont("Body", 14)
     c.setFillColor(INK)
-    c.drawString(123, 142.0, "Agilus")
-    c.drawString(172, 109.9, "Soumy Dhiran")
+    c.drawString(123, 145.0, "Agilus")
+    c.drawString(172, 112.9, "Soumy Dhiran")
     runs = [("Build an intelligent candidate discovery and ranking system that surfaces "
              "the best-fit candidates for a role the way an experienced recruiter would — "
              "by understanding the role and the full candidate profile, not by matching "
              "keywords.", False)]
-    wrap_runs(c, runs, 176, 76.3, 510, size=12, leading=15.5)
+    wrap_runs(c, runs, 176, 79.3, 508, size=12.5, leading=16)
 
 
 def page_solution(c):
