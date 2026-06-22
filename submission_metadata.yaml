@@ -4,23 +4,23 @@
 # ============================================================================
 # Team identity
 # ============================================================================
-team_name: "TODO-your-team-name"
+team_name: "Agilus"
 
 primary_contact:
-  name: "TODO Full Name"
+  name: "Soumy Dhiran"
   email: "soumy2706@gmail.com"
-  phone: "TODO +91-XXXXXXXXXX"
+  phone: "+91-8815192901"
 
 team_members:
-  - name: "TODO Full Name"
+  - name: "Soumy Dhiran"
     email: "soumy2706@gmail.com"
-    role: "ML Engineer"
+    role: "Team Lead / ML Engineer"
 
 # ============================================================================
 # Code and reproducibility
 # ============================================================================
-github_repo: "https://github.com/TODO_USERNAME/redrob-candidate-ranker"
-sandbox_link: "https://TODO-your-sandbox-link"
+github_repo: "https://github.com/Soumy27/redrob-candidate-ranker"
+sandbox_link: "TODO — upload sandbox_colab.ipynb to Google Colab and paste the share link"
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
 
 # ============================================================================

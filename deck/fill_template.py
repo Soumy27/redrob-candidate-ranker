@@ -278,7 +278,7 @@ def page_assets(c):
     cover_body(c)
     bullets(c, [
         [("GitHub repository.  ", True),
-         ("github.com/<your-username>/redrob-candidate-ranker  (replace with your link)", False)],
+         ("github.com/Soumy27/redrob-candidate-ranker", False)],
         [("Ranked output.  ", True),
          ("Top-100 candidates as a validated CSV (Agilus.csv).", False)],
         [("Runnable sandbox.  ", True),
