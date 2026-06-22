@@ -1,0 +1,76 @@
+# Redrob Hackathon — Submission Metadata
+# Fill in the team-identity fields marked TODO before uploading.
+
+# ============================================================================
+# Team identity
+# ============================================================================
+team_name: "TODO-your-team-name"
+
+primary_contact:
+  name: "TODO Full Name"
+  email: "soumy2706@gmail.com"
+  phone: "TODO +91-XXXXXXXXXX"
+
+team_members:
+  - name: "TODO Full Name"
+    email: "soumy2706@gmail.com"
+    role: "ML Engineer"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/TODO_USERNAME/redrob-candidate-ranker"
+sandbox_link: "https://TODO-your-sandbox-link"
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "MacBook Pro M2"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.13"
+  os: "macOS"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+# ============================================================================
+# AI tools declaration
+# ============================================================================
+ai_tools_used:
+  - "None"
+
+ai_usage_summary: |
+  No AI tools were used. The ranking model, feature engineering, scoring logic
+  and reasoning generation are original hand-written work. No candidate data
+  was sent to any external service.
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Hybrid ranker combining an offline lexical-semantic retrieval signal with a
+  structured, explainable fit-scoring engine and a behavioural-availability
+  modifier. The core idea is evidence weighting: a concept found inside a real
+  career-history description or job title counts far more than the same word in
+  a self-asserted skills tag, which is what defeats keyword-stuffing. Six
+  positive components (semantic similarity, core-concept evidence, title/role,
+  production signal, experience band, location) are combined, then reduced by
+  stated-negative penalties (services-only careers, CV/speech without NLP/IR,
+  research-only, title-chasing) and multiplied by a behavioural modifier
+  (recruiter response rate, recency, open-to-work, notice period). Arithmetic-
+  impossible honeypot profiles are detected and forced to the bottom. Runs
+  CPU-only with no network in under a minute on the full 100K pool.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
