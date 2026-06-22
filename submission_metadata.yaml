@@ -20,7 +20,7 @@ team_members:
 # Code and reproducibility
 # ============================================================================
 github_repo: "https://github.com/Soumy27/redrob-candidate-ranker"
-sandbox_link: "TODO — upload sandbox_colab.ipynb to Google Colab and paste the share link"
+sandbox_link: "https://colab.research.google.com/github/Soumy27/redrob-candidate-ranker/blob/main/sandbox_colab.ipynb"
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
 
 # ============================================================================
