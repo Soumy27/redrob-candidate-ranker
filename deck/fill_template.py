@@ -42,17 +42,36 @@ def xc(px):
 
 # --------------------------------------------------------------------------- #
 def wrap_runs(c, runs, x, y, width, size=11.5, leading=16.5):
-    """Lay out (text, bold) runs with word wrap. Returns the y after the block."""
+    """Lay out (text, bold) runs with word wrap. Long unbreakable tokens (URLs)
+    are wrapped character-wise so nothing overflows. Returns the y after block."""
     space = c.stringWidth(" ", "Body", size)
     cx, cy = x, y
     for text, bold in runs:
         font = "Body-Bold" if bold else "Body"
+        c.setFont(font, size)
         for word in text.split():
             ww = c.stringWidth(word, font, size)
+            if ww > width:                      # token wider than the line: break it
+                if cx > x:
+                    cx = x
+                    cy -= leading
+                buf = ""
+                for ch in word:
+                    if buf and c.stringWidth(buf + ch, font, size) > width:
+                        c.setFillColor(INK)
+                        c.drawString(cx, cy, buf)
+                        cy -= leading
+                        buf = ch
+                    else:
+                        buf += ch
+                if buf:
+                    c.setFillColor(INK)
+                    c.drawString(cx, cy, buf)
+                    cx = x + c.stringWidth(buf, font, size) + space
+                continue
             if cx + ww > x + width and cx > x:
                 cx = x
                 cy -= leading
-            c.setFont(font, size)
             c.setFillColor(INK)
             c.drawString(cx, cy, word)
             cx += ww + space
@@ -112,15 +131,22 @@ def arrow(c, x1, y, x2):
 
 # --------------------------------------------------------------------------- #
 def page_cover(c):
-    """Slide 1 — fill Team Name / Leader / Problem Statement (no white-out)."""
-    c.setFont("Body", 13)
+    """Slide 1 — fill the values, aligned exactly to each label's baseline.
+
+    Label baselines / colon ends measured from the template (points):
+      Team Name :        colon x1=115.8  baseline y=142.0
+      Team Leader Name : colon x1=164.4  baseline y=109.9
+      Problem Statement: colon x1=168.3  baseline y= 76.3
+    """
+    c.setFont("Body", 13.5)
     c.setFillColor(INK)
-    c.drawString(xc(168), yc(358), "Agilus")
-    c.drawString(xc(258), yc(404), "Soumy Dhiran")
-    runs = [("Build an AI system that ranks candidates for a role the way a great recruiter "
-             "would — by understanding the job and the whole candidate profile, not by "
-             "matching keywords.", False)]
-    wrap_runs(c, runs, xc(238), yc(450), 430, size=12, leading=16)
+    c.drawString(123, 142.0, "Agilus")
+    c.drawString(172, 109.9, "Soumy Dhiran")
+    runs = [("Build an intelligent candidate discovery and ranking system that surfaces "
+             "the best-fit candidates for a role the way an experienced recruiter would — "
+             "by understanding the role and the full candidate profile, not by matching "
+             "keywords.", False)]
+    wrap_runs(c, runs, 176, 76.3, 510, size=12, leading=15.5)
 
 
 def page_solution(c):
@@ -278,14 +304,14 @@ def page_assets(c):
     cover_body(c)
     bullets(c, [
         [("GitHub repository.  ", True),
-         ("github.com/Soumy27/redrob-candidate-ranker", False)],
+         ("https://github.com/Soumy27/redrob-candidate-ranker", False)],
+        [("Live demo / sandbox (Google Colab).  ", True),
+         ("https://colab.research.google.com/github/Soumy27/redrob-candidate-ranker/"
+          "blob/main/sandbox_colab.ipynb", False)],
         [("Ranked output.  ", True),
-         ("Top-100 candidates as a validated CSV (Agilus.csv).", False)],
-        [("Runnable sandbox.  ", True),
-         ("Google Colab notebook that ranks a 100-candidate sample end-to-end.", False)],
-        [("Demo video.  ", True),
-         ("<add link>", False)],
-    ])
+         ("Top-100 candidates as a validated CSV (Agilus.csv), reproducible with "
+          "python rank.py --candidates candidates.jsonl --out submission.csv", False)],
+    ], leading=16, gap=11)
 
 
 PAGES = {
